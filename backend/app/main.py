@@ -5,7 +5,7 @@ from fastapi import (
     HTTPException,
     UploadFile,
 )
-
+from fastapi.middleware.cors import CORSMiddleware
 from backend.app.db.database import init_db
 
 from backend.app.services.document_validation_service import (
@@ -46,6 +46,13 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # =========================================================
 # Database Startup

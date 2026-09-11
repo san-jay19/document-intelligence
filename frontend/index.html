@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>FinSight AI</title>
+
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem("docint-theme");
+                var theme =
+                    stored ||
+                    (window.matchMedia &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                        ? "dark"
+                        : "light");
+                document.documentElement.setAttribute("data-theme", theme);
+            } catch (error) {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- =====================================================
+         Header
+    ====================================================== -->
+
+    <header class="app-header">
+        <div>
+            <h1>FinSight AI</h1>
+            <p>
+                AI-powered financial document extraction
+                and validation
+            </p>
+        </div>
+
+        <div class="header-actions">
+            <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggleButton"
+                aria-label="Switch to dark mode"
+            >
+                <span aria-hidden="true">🌙</span>
+            </button>
+
+            <div class="api-status" id="apiStatus">
+                <span class="status-dot"></span>
+                <span id="apiStatusText">Checking API...</span>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- =====================================================
+         Navigation
+    ====================================================== -->
+
+    <nav class="top-nav">
+        <button
+            class="nav-button active"
+            data-view="dashboard"
+            id="dashboardNavButton"
+        >
+            Dashboard
+        </button>
+
+        <button
+            class="nav-button"
+            data-view="process"
+            id="processNavButton"
+        >
+            Process Document
+        </button>
+    </nav>
+
+
+    <!-- =====================================================
+         Main Content
+    ====================================================== -->
+
+    <main class="container">
+
+        <!-- =================================================
+             Dashboard View
+        ================================================== -->
+
+        <section
+            id="dashboardView"
+            class="view active-view"
+        >
+
+            <div class="page-header">
+                <div>
+                    <h2>Processed Documents</h2>
+                    <p>
+                        Review previously processed documents
+                        and validation status.
+                    </p>
+                </div>
+
+                <button
+                    class="primary-button"
+                    id="refreshDashboardButton"
+                >
+                    Refresh
+                </button>
+            </div>
+
+
+            <!-- Summary Cards -->
+
+            <div class="summary-grid">
+
+                <div class="summary-card">
+                    <span class="summary-label">
+                        Total Documents
+                    </span>
+
+                    <span
+                        class="summary-value"
+                        id="totalDocuments"
+                    >
+                        0
+                    </span>
+                </div>
+
+                <div class="summary-card">
+                    <span class="summary-label">
+                        Passed
+                    </span>
+
+                    <span
+                        class="summary-value success-text"
+                        id="passedDocuments"
+                    >
+                        0
+                    </span>
+                </div>
+
+                <div class="summary-card">
+                    <span class="summary-label">
+                        Failed
+                    </span>
+
+                    <span
+                        class="summary-value error-text"
+                        id="failedDocuments"
+                    >
+                        0
+                    </span>
+                </div>
+
+                <div class="summary-card">
+                    <span class="summary-label">
+                        Average Confidence
+                    </span>
+
+                    <span
+                        class="summary-value"
+                        id="averageConfidence"
+                    >
+                        —
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard Table -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <h3>Document History</h3>
+                </div>
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Document</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Confidence</th>
+                                <th>Updated</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="documentsTableBody">
+                            <tr>
+                                <td
+                                    colspan="6"
+                                    class="empty-state"
+                                >
+                                    Loading documents...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             Process View
+        ================================================== -->
+
+        <section
+            id="processView"
+            class="view"
+        >
+
+            <div class="page-header">
+                <div>
+                    <h2>Process Document</h2>
+                    <p>
+                        Upload a supported financial document
+                        for AI extraction and validation.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="panel">
+
+                <form id="processForm">
+
+                    <!-- Document Type -->
+
+                    <div class="form-group">
+
+                        <label for="documentType">
+                            Document Type
+                        </label>
+
+                        <select
+                            id="documentType"
+                            name="document_type"
+                            required
+                        >
+                            <option value="">
+                                Select document type
+                            </option>
+
+                            <option value="invoice">
+                                Invoice
+                            </option>
+
+                            <option value="balance_sheet">
+                                Balance Sheet
+                            </option>
+
+                            <option value="profit_and_loss">
+                                Profit &amp; Loss
+                            </option>
+
+                            <option value="cash_flow_statement">
+                                Cash Flow Statement
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- File -->
+
+                    <div class="form-group">
+
+                        <label for="documentFile">
+                            Document File
+                        </label>
+
+                        <input
+                            type="file"
+                            id="documentFile"
+                            name="file"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            required
+                        />
+
+                        <small>
+                            Supported: PDF, JPG, PNG
+                        </small>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="processButton"
+                    >
+                        Process Document
+                    </button>
+
+                </form>
+
+
+                <!-- Processing Message -->
+
+                <div
+                    id="processingMessage"
+                    class="message hidden"
+                ></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 Result
+            ================================================== -->
+
+            <div
+                id="resultSection"
+                class="hidden"
+            >
+
+                <div class="page-header">
+                    <div>
+                        <h2>Processing Result</h2>
+                    </div>
+                </div>
+
+
+                <!-- Result Summary -->
+
+                <div class="summary-grid">
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Document
+                        </span>
+
+                        <span
+                            class="summary-value small-value"
+                            id="resultDocumentName"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Type
+                        </span>
+
+                        <span
+                            class="summary-value small-value"
+                            id="resultDocumentType"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Processing Status
+                        </span>
+
+                        <span
+                            id="resultProcessingStatus"
+                            class="status-badge"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <span class="summary-label">
+                            Confidence
+                        </span>
+
+                        <span
+                            class="summary-value"
+                            id="resultConfidence"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Validation Summary -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Financial Validation</h3>
+                    </div>
+
+                    <div
+                        id="validationSummary"
+                        class="validation-summary"
+                    ></div>
+
+                    <div
+                        class="table-wrapper"
+                    >
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Check</th>
+                                    <th>Status</th>
+                                    <th>Calculated</th>
+                                    <th>Reported</th>
+                                    <th>Variance</th>
+                                </tr>
+                            </thead>
+
+                            <tbody
+                                id="validationTableBody"
+                            >
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Extracted Fields -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Extracted Fields</h3>
+                    </div>
+
+                    <div
+                        id="fieldsContainer"
+                        class="fields-grid"
+                    ></div>
+
+                </div>
+
+
+                <!-- Extracted Tables -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Extracted Tables</h3>
+                    </div>
+
+                    <div
+                        id="tablesContainer"
+                    ></div>
+
+                </div>
+
+
+                <!-- Raw JSON -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Raw JSON</h3>
+
+                        <button
+                            class="secondary-button"
+                            id="copyJsonButton"
+                            type="button"
+                        >
+                            Copy
+                        </button>
+                    </div>
+
+                    <pre
+                        id="rawJson"
+                        class="json-viewer"
+                    ></pre>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JavaScript
+    ====================================================== -->
+
+    <script src="app.js"></script>
+
+</body>
+</html>
