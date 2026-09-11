@@ -1,0 +1,126 @@
+{
+  "document_name": "cash_flow_statement_sample.pdf",
+  "document_type": "cash_flow_statement",
+  "processing_status": "FAILED",
+  "file_validation": {
+    "status": "PASS",
+    "file_type": "pdf",
+    "page_count": 2
+  },
+  "extracted_text": "--- Page 1 ---\nCONSOLIDATED CASH FLOW STATEMENT\n...\nNet increase in cash and cash equivalents ...",
+  "extracted_data": {
+    "ai_document_type": "cash_flow_statement",
+    "fields": [
+      {
+        "name": "Net cash generated from operating activities",
+        "value": [
+          272242758.0,
+          249663120.0
+        ],
+        "evidence": "Net cash generated from operating activities",
+        "confidence": 0.86
+      },
+      {
+        "name": "Net cash used in investing activities",
+        "value": [
+          -99204.0,
+          -100768.0
+        ],
+        "evidence": "Net cash used in investing activities",
+        "confidence": 0.84
+      },
+      {
+        "name": "Net cash generated from financing activities",
+        "value": [
+          573776603.0,
+          -58929743.0
+        ],
+        "evidence": "Net cash generated from financing activities",
+        "confidence": 0.8
+      },
+      {
+        "name": "Effect of exchange rate changes",
+        "value": [
+          105872.0,
+          -282622.0
+        ],
+        "evidence": "Effect of exchange rate changes",
+        "confidence": 0.83
+      },
+      {
+        "name": "Net increase in cash and cash equivalents",
+        "value": [
+          737504366.0,
+          102422381.0
+        ],
+        "evidence": "Net increase in cash and cash equivalents",
+        "confidence": 0.91
+      },
+      {
+        "name": "Cash and cash equivalents at beginning",
+        "value": [
+          493111196.0,
+          390688815.0
+        ],
+        "evidence": "Cash and cash equivalents at beginning",
+        "confidence": 0.9
+      },
+      {
+        "name": "Cash and cash equivalents at end",
+        "value": [
+          1230615562.0,
+          493111196.0
+        ],
+        "evidence": "Cash and cash equivalents at end",
+        "confidence": 0.91
+      }
+    ],
+    "tables": []
+  },
+  "confidence": 0.864,
+  "validation": {
+    "overall_status": "FAIL",
+    "checks": [
+      {
+        "check": "Operating + Investing + Financing + FX ≈ Net Increase — Period 1",
+        "status": "FAIL",
+        "calculated": 846026029.0,
+        "reported": 737504366.0,
+        "variance": 108521663.0
+      },
+      {
+        "check": "Opening Cash + Net Increase ≈ Closing Cash — Period 1",
+        "status": "PASS",
+        "calculated": 1230615562.0,
+        "reported": 1230615562.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Operating + Investing + Financing + FX ≈ Net Increase — Period 2",
+        "status": "FAIL",
+        "calculated": 190645604.0,
+        "reported": 102422381.0,
+        "variance": 88223223.0
+      },
+      {
+        "check": "Opening Cash + Net Increase ≈ Closing Cash — Period 2",
+        "status": "PASS",
+        "calculated": 493111196.0,
+        "reported": 493111196.0,
+        "variance": 0.0
+      }
+    ],
+    "errors": [
+      "Cash flow component reconciliation failed for the extracted source values."
+    ],
+    "warnings": [
+      "A source-level or extraction-level inconsistency is surfaced as FAIL rather than corrected automatically."
+    ],
+    "summary": {
+      "periods_checked": 2,
+      "passed_checks": 2,
+      "failed_checks": 2,
+      "not_applicable_checks": 0
+    }
+  }
+}

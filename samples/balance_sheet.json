@@ -1,0 +1,100 @@
+{
+  "document_name": "balance_sheet_sample.pdf",
+  "document_type": "balance_sheet",
+  "processing_status": "PASS",
+  "file_validation": {
+    "status": "PASS",
+    "file_type": "pdf",
+    "page_count": 2
+  },
+  "extracted_text": "--- Page 1 ---\nCONSOLIDATED BALANCE SHEET\n...\nTotal Assets 1000.00\nTotal Capital & Liabilities 1000.00",
+  "extracted_data": {
+    "ai_document_type": "balance_sheet",
+    "fields": [
+      {
+        "name": "Total Assets",
+        "value": [
+          1000.0,
+          900.0
+        ],
+        "evidence": "Total Assets 1000.00 / 900.00",
+        "confidence": 0.93
+      },
+      {
+        "name": "Total Capital & Liabilities",
+        "value": [
+          1000.0,
+          900.0
+        ],
+        "evidence": "Total Capital & Liabilities 1000.00 / 900.00",
+        "confidence": 0.92
+      },
+      {
+        "name": "Cash and balances with RBI",
+        "value": [
+          100.0,
+          90.0
+        ],
+        "evidence": "Cash and balances with RBI",
+        "confidence": 0.9
+      }
+    ],
+    "tables": []
+  },
+  "confidence": 0.917,
+  "validation": {
+    "overall_status": "PASS",
+    "checks": [
+      {
+        "check": "Total Capital & Liabilities ≈ Total Assets — Period 1",
+        "status": "PASS",
+        "calculated": 1000.0,
+        "reported": 1000.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Total Capital & Liabilities ≈ Total Assets — Period 2",
+        "status": "PASS",
+        "calculated": 900.0,
+        "reported": 900.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Asset components ≈ Total Assets — Period 1",
+        "status": "PASS",
+        "calculated": 1000.0,
+        "reported": 1000.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Asset components ≈ Total Assets — Period 2",
+        "status": "PASS",
+        "calculated": 900.0,
+        "reported": 900.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Liability components ≈ Total Capital & Liabilities — Period 1",
+        "status": "NOT_APPLICABLE",
+        "calculated": null,
+        "reported": null
+      },
+      {
+        "check": "Liability components ≈ Total Capital & Liabilities — Period 2",
+        "status": "NOT_APPLICABLE",
+        "calculated": null,
+        "reported": null
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      "Some liability component values were not period-complete; component reconciliation was not applied."
+    ],
+    "summary": {
+      "periods_checked": 2,
+      "passed_checks": 4,
+      "failed_checks": 0,
+      "not_applicable_checks": 2
+    }
+  }
+}

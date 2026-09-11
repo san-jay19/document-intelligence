@@ -1,0 +1,126 @@
+{
+  "document_name": "invoice_sample.jpg",
+  "document_type": "invoice",
+  "processing_status": "PASS",
+  "file_validation": {
+    "status": "PASS",
+    "file_type": "jpg",
+    "page_count": 1
+  },
+  "extracted_text": "Invoice No: 94404257\nDate: 07/03/2013\nVAT 10%\nTotal 1100.00",
+  "extracted_data": {
+    "ai_document_type": "invoice",
+    "fields": [
+      {
+        "name": "invoice_number",
+        "value": "94404257",
+        "evidence": "Invoice No: 94404257",
+        "confidence": 0.99
+      },
+      {
+        "name": "invoice_date",
+        "value": "07/03/2013",
+        "evidence": "Date: 07/03/2013",
+        "confidence": 0.98
+      },
+      {
+        "name": "seller",
+        "value": "Cruz PLC",
+        "evidence": "Seller: Cruz PLC",
+        "confidence": 0.97
+      },
+      {
+        "name": "client",
+        "value": "Sandoval-Phillips",
+        "evidence": "Client: Sandoval-Phillips",
+        "confidence": 0.96
+      },
+      {
+        "name": "vat_amount",
+        "value": 100.0,
+        "evidence": "VAT 10%; VAT Amount 100.00",
+        "confidence": 0.95
+      },
+      {
+        "name": "total_amount",
+        "value": 1100.0,
+        "evidence": "Total 1100.00",
+        "confidence": 0.99
+      }
+    ],
+    "tables": [
+      {
+        "table_name": "Line Items",
+        "headers": [
+          "No.",
+          "Description",
+          "Qty",
+          "Net Price",
+          "Net Worth",
+          "VAT %",
+          "Gross Worth"
+        ],
+        "rows": [
+          [
+            1,
+            "Example item",
+            1,
+            1000.0,
+            1000.0,
+            10.0,
+            1100.0
+          ]
+        ]
+      }
+    ]
+  },
+  "confidence": 0.973,
+  "validation": {
+    "overall_status": "PASS",
+    "checks": [
+      {
+        "check": "Item 1: quantity × unit price ≈ net amount",
+        "status": "PASS",
+        "calculated": 1000.0,
+        "reported": 1000.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Item 1: net amount × VAT % ≈ VAT amount",
+        "status": "PASS",
+        "calculated": 100.0,
+        "reported": 100.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Item 1: net + VAT ≈ gross",
+        "status": "PASS",
+        "calculated": 1100.0,
+        "reported": 1100.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Calculated VAT ≈ invoice VAT",
+        "status": "PASS",
+        "calculated": 100.0,
+        "reported": 100.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Subtotal + VAT ≈ total",
+        "status": "PASS",
+        "calculated": 1100.0,
+        "reported": 1100.0,
+        "variance": 0.0
+      }
+    ],
+    "errors": [],
+    "warnings": [],
+    "summary": {
+      "periods_checked": 1,
+      "passed_checks": 5,
+      "failed_checks": 0,
+      "not_applicable_checks": 0
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "document_name": "profit_and_loss_sample.pdf",
+  "document_type": "profit_and_loss",
+  "processing_status": "PASS",
+  "file_validation": {
+    "status": "PASS",
+    "file_type": "pdf",
+    "page_count": 2
+  },
+  "extracted_text": "--- Page 1 ---\nCONSOLIDATED PROFIT AND LOSS ACCOUNT\n...\nTotal Income ...\nTotal Expenditure ...",
+  "extracted_data": {
+    "ai_document_type": "profit_and_loss",
+    "fields": [
+      {
+        "name": "Interest Earned",
+        "value": [
+          700.0,
+          600.0
+        ],
+        "evidence": "Interest Earned",
+        "confidence": 0.94
+      },
+      {
+        "name": "Other Income",
+        "value": [
+          300.0,
+          200.0
+        ],
+        "evidence": "Other Income",
+        "confidence": 0.92
+      },
+      {
+        "name": "Total Income",
+        "value": [
+          1000.0,
+          800.0
+        ],
+        "evidence": "Total Income",
+        "confidence": 0.94
+      },
+      {
+        "name": "Interest Expended",
+        "value": [
+          200.0,
+          150.0
+        ],
+        "evidence": "Interest Expended",
+        "confidence": 0.93
+      },
+      {
+        "name": "Operating Expenses",
+        "value": [
+          300.0,
+          250.0
+        ],
+        "evidence": "Operating Expenses",
+        "confidence": 0.91
+      },
+      {
+        "name": "Provisions and Contingencies",
+        "value": [
+          100.0,
+          100.0
+        ],
+        "evidence": "Provisions and Contingencies",
+        "confidence": 0.89
+      },
+      {
+        "name": "Total Expenditure",
+        "value": [
+          600.0,
+          500.0
+        ],
+        "evidence": "Total Expenditure",
+        "confidence": 0.93
+      },
+      {
+        "name": "Net profit for the year",
+        "value": [
+          400.0,
+          300.0
+        ],
+        "evidence": "Net profit for the year",
+        "confidence": 0.9
+      },
+      {
+        "name": "Minority Interest",
+        "value": [
+          50.0,
+          40.0
+        ],
+        "evidence": "Minority Interest",
+        "confidence": 0.9
+      },
+      {
+        "name": "Consolidated profit for the year",
+        "value": [
+          350.0,
+          260.0
+        ],
+        "evidence": "Consolidated profit for the year",
+        "confidence": 0.89
+      }
+    ],
+    "tables": []
+  },
+  "confidence": 0.915,
+  "validation": {
+    "overall_status": "PASS",
+    "checks": [
+      {
+        "check": "Interest Earned + Other Income ≈ Total Income — Period 1",
+        "status": "PASS",
+        "calculated": 1000.0,
+        "reported": 1000.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Interest Expended + Operating Expenses + Provisions ≈ Total Expenditure — Period 1",
+        "status": "PASS",
+        "calculated": 600.0,
+        "reported": 600.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Total Income - Total Expenditure ≈ Net Profit Before Minority — Period 1",
+        "status": "PASS",
+        "calculated": 400.0,
+        "reported": 400.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Net Profit Before Minority - Minority Interest ≈ Consolidated Profit — Period 1",
+        "status": "PASS",
+        "calculated": 350.0,
+        "reported": 350.0,
+        "variance": 0.0
+      },
+      {
+        "check": "Interest Earned + Other Income ≈ Total Income — Period 2",
+        "status": "PASS",
+        "calculated": 800.0,
+        "reported": 800.0,
+        "variance": 0.0
+      }
+    ],
+    "errors": [],
+    "warnings": [
+      "Associate-profit extraction is retained but does not automatically alter the mandatory reconciliation formula when comparative sign interpretation is ambiguous."
+    ],
+    "summary": {
+      "periods_checked": 2,
+      "passed_checks": 10,
+      "failed_checks": 0,
+      "not_applicable_checks": 0
+    }
+  }
+}
