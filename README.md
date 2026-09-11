@@ -29,23 +29,6 @@
 
 </p>
 
-## Live Application
-
-<div align="center">
-
-<a href="https://finsight-ai-povk.onrender.com">
-  <img src="https://img.shields.io/badge/Open%20Frontend-FinSight%20AI-ff4d1c?style=for-the-badge&logo=render&logoColor=white" alt="Open FinSight AI Frontend">
-</a>
-
-<a href="https://document-intelligence-538o.onrender.com">
-  <img src="https://img.shields.io/badge/Open%20Backend-Live%20FastAPI%20API-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="Open FinSight AI Backend">
-</a>
-
-<a href="https://document-intelligence-538o.onrender.com/docs">
-  <img src="https://img.shields.io/badge/Open%20Swagger-API%20Docs-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Open Swagger">
-</a>
-
-</div>
 
 ---
 
