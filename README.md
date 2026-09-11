@@ -1230,13 +1230,13 @@ https://document-intelligence-538o.onrender.com/api/v1/health
 ### Frontend
 
 ```text
-<ADD LIVE FRONTEND URL>
+https://finsight-ai-povk.onrender.com
 ```
 
 ### GitHub
 
 ```text
-<ADD PUBLIC GITHUB REPOSITORY URL>
+https://github.com/san-jay19/document-intelligence
 ```
 
 ---
