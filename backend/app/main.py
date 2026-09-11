@@ -1,3 +1,5 @@
+import os
+
 from fastapi import (
     FastAPI,
     File,
@@ -5,7 +7,9 @@ from fastapi import (
     HTTPException,
     UploadFile,
 )
+
 from fastapi.middleware.cors import CORSMiddleware
+
 from backend.app.db.database import init_db
 
 from backend.app.services.document_validation_service import (
@@ -46,13 +50,43 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
+# =========================================================
+# CORS Configuration
+# =========================================================
+
+# Render / production frontend URL should be configured
+# using the FRONTEND_URL environment variable.
+#
+# Local development can use:
+# FRONTEND_URL=http://localhost:3000
+#
+# Production:
+# FRONTEND_URL=https://your-frontend.onrender.com
+
+FRONTEND_URL = os.getenv(
+    "FRONTEND_URL",
+    "http://localhost:3000",
+)
+
+ALLOWED_ORIGINS = [
+    FRONTEND_URL,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# Remove duplicates while preserving order
+ALLOWED_ORIGINS = list(dict.fromkeys(ALLOWED_ORIGINS))
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://finsight-ai-povk.onrender.com"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # =========================================================
 # Database Startup
