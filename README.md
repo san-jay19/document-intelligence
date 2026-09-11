@@ -971,36 +971,6 @@ This makes discrepancies visible to the user rather than hiding them.
 
 ---
 
-# 20. Testing
-
-The project contains:
-
-- document/file validation tests
-- extraction tests
-- Invoice validation tests
-- Balance Sheet validation tests
-- Profit & Loss validation tests
-- Cash Flow validation tests
-- API endpoint tests
-
-The tests are designed to avoid making real Groq calls where possible and to exercise deterministic business logic locally.
-
-### Current test-suite status
-
-The project now has a pytest-based automated suite, but the suite is still being refined around fixture alignment for the financial validators.
-
-The latest local run reached:
-
-```text
-8 passed
-4 failed
-```
-
-The remaining failures are test-fixture/API-assertion alignment issues rather than deployment failures. The underlying financial validators have already been exercised separately against representative extraction samples.
-
-Before treating a commit as final for submission, the remaining pytest failures should be resolved and the suite rerun to a clean result.
-
----
 
 # 21. Sample Dataset
 
@@ -1204,47 +1174,6 @@ and include at least one validation failure so the audience can see that the sys
 
 ---
 
-# 27. Final Submission Checklist
-
-### Application
-
-- [x] Upload endpoint
-- [x] File validation
-- [x] OCR/native text extraction
-- [x] AI field extraction
-- [x] AI table extraction
-- [x] Evidence
-- [x] Confidence
-- [x] Invoice validation
-- [x] Balance Sheet validation
-- [x] Profit & Loss validation
-- [x] Cash Flow validation
-- [x] Validation router
-- [x] PostgreSQL persistence
-- [x] Document retrieval
-- [x] Document listing
-- [x] Swagger/OpenAPI
-- [x] Frontend dashboard
-- [x] Frontend processing screen
-- [x] Frontend result/detail view
-- [x] Frontend raw JSON view
-- [x] Backend Docker deployment
-- [x] Live backend
-- [x] Live frontend
-
-### Finalization
-
-- [ ] Clean green automated test run
-- [ ] Final public GitHub repository
-- [ ] Architecture diagram image
-- [ ] Sample JSON files
-- [ ] AI/tool usage declaration
-- [ ] Final known-limitations review
-- [ ] Final production-notes review
-- [ ] Short demo recording
-- [ ] Final presentation / PPT
-
----
 
 # 28. Useful URLs
 
@@ -1280,26 +1209,3 @@ https://document-intelligence-538o.onrender.com/api/v1/health
 
 ---
 
-# 29. Project Identity
-
-**Project name:** `FinSight AI`
-
-**Repository suggestion:**
-
-```text
-finsight-ai
-```
-
-**Full title:**
-
-> FinSight AI — Intelligent Financial Document Extraction & Validation
-
-**One-line description:**
-
-> An AI-powered financial document intelligence platform that extracts structured data from invoices and financial statements, validates financial arithmetic deterministically, and provides a deployable review dashboard.
-
----
-
-<p align="center">
-  Built as an end-to-end document intelligence case study with AI extraction, deterministic financial validation, PostgreSQL persistence, REST APIs, and cloud deployment.
-</p>
