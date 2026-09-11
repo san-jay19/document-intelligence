@@ -4,7 +4,7 @@ from backend.app.schemas.extraction import (
     ExtractionResult,
 )
 
-from backend.app.services.financial_validation_service import (
+from backend.app.services.validation_router import (
     validate_document_financials,
 )
 
