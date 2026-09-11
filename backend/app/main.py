@@ -55,27 +55,21 @@ app = FastAPI(
 # CORS Configuration
 # =========================================================
 
-# Render / production frontend URL should be configured
-# using the FRONTEND_URL environment variable.
-#
-# Local development can use:
-# FRONTEND_URL=http://localhost:3000
-#
-# Production:
-# FRONTEND_URL=https://your-frontend.onrender.com
-
 FRONTEND_URL = os.getenv(
     "FRONTEND_URL",
-    "http://localhost:3000",
+    "https://finsight-ai-povk.onrender.com",
 )
 
 ALLOWED_ORIGINS = [
     FRONTEND_URL,
+    "https://finsight-ai-povk.onrender.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
-# Remove duplicates while preserving order
+# Remove duplicates
 ALLOWED_ORIGINS = list(dict.fromkeys(ALLOWED_ORIGINS))
 
 
@@ -83,7 +77,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
