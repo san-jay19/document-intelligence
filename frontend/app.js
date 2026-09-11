@@ -497,6 +497,7 @@ async function processDocument(event) {
                 {
                     method: "POST",
                     body: formData,
+                    cache: "no-store",
                 }
             );
 
@@ -1342,6 +1343,63 @@ function escapeHtml(
 
 
 // =========================================================
+// Backend Connection Test
+// =========================================================
+
+async function testBackendConnection() {
+
+    try {
+
+        showMessage(
+            "Testing backend connection...",
+            "info"
+        );
+
+        const response =
+            await fetch(
+                `${API_BASE_URL}/api/v1/health`,
+                {
+                    method: "GET",
+                    cache: "no-store",
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Backend returned HTTP ${response.status}`
+            );
+        }
+
+        showMessage(
+            `Backend connected: ${data.service}`,
+            "success"
+        );
+
+        console.log(
+            "Backend health:",
+            data
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Backend connection error:",
+            error
+        );
+
+        showMessage(
+            `Backend connection failed: ${error.message}`,
+            "error"
+        );
+    }
+}
+
+
+// =========================================================
 // Initial Load
 // =========================================================
 
@@ -1352,6 +1410,8 @@ document.addEventListener(
         checkApiHealth();
 
         loadDashboard();
+
+        testBackendConnection();
 
     }
 );
