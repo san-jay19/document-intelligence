@@ -1,125 +1,188 @@
-# FinSight AI
+\# FinSight AI
 
-<p align="center">
-  <strong>Intelligent Financial Document Extraction & Validation</strong><br>
-  Upload financial documents, extract structured data with AI, validate financial arithmetic deterministically, persist results, and review them through a web dashboard.
-</p>
+\<p align="center">
 
-<p align="center">
-  <a href="https://document-intelligence-538o.onrender.com/docs">
-    <img src="https://img.shields.io/badge/Swagger-OpenAPI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger">
-  </a>
-  <img src="https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
-  <img src="https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
-  <img src="https://img.shields.io/badge/Groq-AI%20Extraction-black?style=for-the-badge" alt="Groq">
-  <img src="https://img.shields.io/badge/Docker-Deployable-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
-  <img src="https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Render">
-</p>
+  \<strong>Intelligent Financial Document Extraction & Validation\</strong>\<br>
 
----
+  Upload financial documents, extract structured data with AI, validate financial arithmetic deterministically, persist results, and review them through a web dashboard.
 
-## 1. What is FinSight AI?
+\</p>
 
-**FinSight AI** is an end-to-end document intelligence system for financial documents.
+\<p align="center">
+
+  \<a href="https\://document-intelligence-538o.onrender.com/docs">
+
+    \<img src="https\://img.shields.io/badge/Swagger-OpenAPI-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger">
+
+  \</a>
+
+  \<img src="https\://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+
+  \<img src="https\://img.shields.io/badge/PostgreSQL-Supabase-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+
+  \<img src="https\://img.shields.io/badge/Groq-AI%20Extraction-black?style=for-the-badge" alt="Groq">
+
+  \<img src="https\://img.shields.io/badge/Docker-Deployable-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+
+  \<img src="https\://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Render">
+
+\</p>
+
+\---
+
+\## 1. What is FinSight AI?
+
+**\*\*FinSight AI\*\*** is an end-to-end document intelligence system for financial documents.
 
 It is designed around a practical processing pipeline:
 
-```text
+\`\`\`text
+
 Document Upload
-      ↓
+
+      ↓
+
 File Validation
-      ↓
+
+      ↓
+
 Native PDF Text Extraction / OCR
-      ↓
+
+      ↓
+
 AI Field + Table Extraction
-      ↓
+
+      ↓
+
 Evidence + Confidence
-      ↓
+
+      ↓
+
 Document-Type Validation Router
-      ↓
+
+      ↓
+
 Financial Reconciliation Checks
-      ↓
+
+      ↓
+
 Supabase PostgreSQL Persistence
-      ↓
+
+      ↓
+
 Dashboard / REST API / Swagger
-```
+
+\`\`\`
 
 The system supports four financial document types:
 
-| Document type | AI extraction | Financial validation | Dashboard/API |
-|---|:---:|:---:|:---:|
-| Invoice | ✅ | ✅ | ✅ |
-| Balance Sheet | ✅ | ✅ | ✅ |
-| Profit & Loss | ✅ | ✅ | ✅ |
-| Cash Flow Statement | ✅ | ✅ | ✅ |
+\| Document type | AI extraction | Financial validation | Dashboard/API |
+
+\|---|:---:|:---:|:---:|
+
+\| Invoice | ✅ | ✅ | ✅ |
+
+\| Balance Sheet | ✅ | ✅ | ✅ |
+
+\| Profit & Loss | ✅ | ✅ | ✅ |
+
+\| Cash Flow Statement | ✅ | ✅ | ✅ |
 
 The implementation follows the case-study requirements for upload, validation, OCR/text extraction, AI extraction, structured JSON, financial calculation validation, confidence/evidence, persistence, API access, frontend review, and deployment.
 
----
+\---
 
-## 2. Core Features
+\## 2. Core Features
 
-### Document intake
+\### Document intake
 
-- PDF, JPG, JPEG, and PNG support
-- File validation before expensive processing
-- Filename and document-type validation
-- Maximum-page constraints handled by the document validation layer
-- Unsupported, empty, unreadable, and invalid documents can be rejected
+\- PDF, JPG, JPEG, and PNG support
 
-### OCR and text extraction
+\- File validation before expensive processing
 
-- Native PDF text extraction is attempted first
-- Scanned PDFs fall back to image-based OCR
-- JPG/PNG files are processed through Tesseract OCR
-- OCR output preserves page separators for scanned PDFs
+\- Filename and document-type validation
 
-### AI extraction
+\- Maximum-page constraints handled by the document validation layer
+
+\- Unsupported, empty, unreadable, and invalid documents can be rejected
+
+\### OCR and text extraction
+
+\- Native PDF text extraction is attempted first
+
+\- Scanned PDFs fall back to image-based OCR
+
+\- JPG/PNG files are processed through Tesseract OCR
+
+\- OCR output preserves page separators for scanned PDFs
+
+\### AI extraction
 
 The extraction layer uses Groq with:
 
-```text
+\`\`\`text
+
 Model: openai/gpt-oss-20b
-```
+
+\`\`\`
 
 The AI produces a flexible, generic structure rather than forcing every document into one rigid schema.
 
 Each extracted field can contain:
 
-```json
+\`\`\`json
+
 {
-  "name": "field_name",
-  "value": "...",
-  "evidence": "Source text supporting the extraction",
-  "confidence": 0.92
+
+  "name": "field\_name",
+
+  "value": "...",
+
+  "evidence": "Source text supporting the extraction",
+
+  "confidence": 0.92
+
 }
-```
+
+\`\`\`
 
 Tables are represented as:
 
-```json
+\`\`\`json
+
 {
-  "table_name": "Line Items",
-  "headers": ["Description", "Quantity", "Amount"],
-  "rows": [
-    ["Example", 2, 1000]
-  ]
+
+  "table\_name": "Line Items",
+
+  "headers": ["Description", "Quantity", "Amount"],
+
+  "rows": [
+
+    ["Example", 2, 1000]
+
+  ]
+
 }
-```
+
+\`\`\`
 
 Important extraction behavior:
 
-- Missing values are represented as `null` / unavailable rather than invented
-- Evidence can be attached to extracted fields
-- Confidence can be displayed per field and as an overall extraction measure
-- Table structure remains flexible across different financial documents
-- The AI is not trusted as the final arithmetic authority
+\- Missing values are represented as \`null\` / unavailable rather than invented
 
----
+\- Evidence can be attached to extracted fields
 
-# 3. Financial Validation Engine
+\- Confidence can be displayed per field and as an overall extraction measure
 
-A core design decision in FinSight AI is to separate **AI extraction** from **deterministic financial validation**.
+\- Table structure remains flexible across different financial documents
+
+\- The AI is not trusted as the final arithmetic authority
+
+\---
+
+\# 3. Financial Validation Engine
+
+A core design decision in FinSight AI is to separate **\*\*AI extraction\*\*** from **\*\*deterministic financial validation\*\***.
 
 The AI extracts the numbers.
 
@@ -127,1117 +190,1630 @@ Python validation services calculate and reconcile the numbers.
 
 This makes the system easier to inspect, test, and explain.
 
-## Invoice validation
+\## Invoice validation
 
 The Invoice validator checks, where the required values are available:
 
-```text
+\`\`\`text
+
 Quantity × Unit Price ≈ Net Amount
+
 Net Amount × VAT % ≈ VAT Amount
+
 Net Amount + VAT ≈ Gross Amount
+
 Σ Line VAT ≈ Invoice VAT
+
 Subtotal + VAT ≈ Invoice Total
-```
+
+\`\`\`
 
 Tolerance is used for ordinary decimal/rounding differences rather than requiring unrealistic exact equality.
 
-## Balance Sheet validation
+\## Balance Sheet validation
 
 For each detected period:
 
-```text
+\`\`\`text
+
 Total Capital & Liabilities ≈ Total Assets
-```
+
+\`\`\`
 
 Component reconciliation is also attempted where enough complete data is available:
 
-```text
+\`\`\`text
+
 Capital
-+ Reserves and Surplus
-+ Minority Interest
-+ Deposits
-+ Borrowings
-+ Other Liabilities / Provisions
+
+\+ Reserves and Surplus
+
+\+ Minority Interest
+
+\+ Deposits
+
+\+ Borrowings
+
+\+ Other Liabilities / Provisions
+
 ≈ Total Capital & Liabilities
-```
+
+\`\`\`
 
 and:
 
-```text
+\`\`\`text
+
 Cash
-+ Bank Balances
-+ Investments
-+ Advances
-+ Fixed Assets
-+ Other Assets
+
+\+ Bank Balances
+
+\+ Investments
+
+\+ Advances
+
+\+ Fixed Assets
+
+\+ Other Assets
+
 ≈ Total Assets
-```
 
-The implementation deliberately returns `NOT_APPLICABLE` for a component check when the extracted structure is insufficient rather than fabricating a result.
+\`\`\`
 
-## Profit & Loss validation
+The implementation deliberately returns \`NOT\_APPLICABLE\` for a component check when the extracted structure is insufficient rather than fabricating a result.
+
+\## Profit & Loss validation
 
 For each detected reporting period:
 
-```text
+\`\`\`text
+
 Interest Earned + Other Income ≈ Total Income
-```
 
-```text
+\`\`\`
+
+\`\`\`text
+
 Interest Expended
-+ Operating Expenses
-+ Provisions / Contingencies
+
+\+ Operating Expenses
+
+\+ Provisions / Contingencies
+
 ≈ Total Expenditure
-```
 
-```text
+\`\`\`
+
+\`\`\`text
+
 Total Income - Total Expenditure
+
 ≈ Net Profit Before Minority Interest
-```
 
-```text
+\`\`\`
+
+\`\`\`text
+
 Net Profit Before Minority Interest
-- Minority Interest
-≈ Consolidated Profit
-```
 
-```text
+\- Minority Interest
+
+≈ Consolidated Profit
+
+\`\`\`
+
+\`\`\`text
+
 Consolidated Profit
-+ Balance Brought Forward
+
+\+ Balance Brought Forward
+
 ≈ Total Available for Appropriation
-```
+
+\`\`\`
 
 The validator also treats ambiguous comparative/associate-profit extraction cautiously instead of silently modifying mandatory formulas.
 
-## Cash Flow validation
+\## Cash Flow validation
 
 For each detected reporting period:
 
-```text
+\`\`\`text
+
 Operating Cash Flow
-+ Investing Cash Flow
-+ Financing Cash Flow
-+ FX / Translation Effects
+
+\+ Investing Cash Flow
+
+\+ Financing Cash Flow
+
+\+ FX / Translation Effects
+
 ≈ Net Increase in Cash
-```
+
+\`\`\`
 
 and:
 
-```text
+\`\`\`text
+
 Opening Cash
-+ Net Increase
-+ Applicable Adjustments
+
+\+ Net Increase
+
+\+ Applicable Adjustments
+
 ≈ Closing Cash
-```
+
+\`\`\`
 
 Parenthesized financial figures are handled as negative values where appropriate.
 
 An important principle is preserved:
 
-> A source-level discrepancy is surfaced as a validation failure; the system does not "correct" the source data just to force a PASS.
+*> A source-level discrepancy is surfaced as a validation failure; the system does not "correct" the source data just to force a PASS.*
 
----
+\---
 
-# 4. Validation Router
+\# 4. Validation Router
 
 The financial validators are modularized by document type and coordinated through:
 
-```text
-backend/app/services/validation_router.py
-```
+\`\`\`text
+
+backend/app/services/validation\_router.py
+
+\`\`\`
 
 The router selects:
 
-```text
+\`\`\`text
+
 invoice
-      → financial_validation_service.py
 
-balance_sheet
-      → balance_sheet_validation_service.py
+      → financial\_validation\_service.py
 
-profit_and_loss
-      → profit_loss_validation_service.py
+balance\_sheet
 
-cash_flow_statement
-      → cash_flow_validation_service.py
-```
+      → balance\_sheet\_validation\_service.py
+
+profit\_and\_loss
+
+      → profit\_loss\_validation\_service.py
+
+cash\_flow\_statement
+
+      → cash\_flow\_validation\_service.py
+
+\`\`\`
 
 This keeps document-specific reconciliation logic isolated while giving the API one common entry point:
 
-```python
-validate_document_financials(
-    extraction=extracted_data,
-    document_type=document_type,
+\`\`\`python
+
+validate\_document\_financials(
+
+    extraction=extracted\_data,
+
+    document\_type=document\_type,
+
 )
-```
 
----
+\`\`\`
 
-# 5. Evidence and Confidence
+\---
+
+\# 5. Evidence and Confidence
 
 FinSight AI does not only return extracted values.
 
 The frontend exposes:
 
-- extracted field name
-- extracted value
-- field-level confidence when available
-- source/evidence text when available
-- missing/unavailable field highlighting
-- low-confidence highlighting
-- overall extraction confidence
+\- extracted field name
+
+\- extracted value
+
+\- field-level confidence when available
+
+\- source/evidence text when available
+
+\- missing/unavailable field highlighting
+
+\- low-confidence highlighting
+
+\- overall extraction confidence
 
 The UI visually distinguishes missing fields and lower-confidence fields so a reviewer can focus on uncertain outputs instead of treating every AI result equally.
 
----
+\---
 
-# 6. API
+\# 6. API
 
 Base backend:
 
-```text
-https://document-intelligence-538o.onrender.com
-```
+\`\`\`text
+
+https\://document-intelligence-538o.onrender.com
+
+\`\`\`
 
 Swagger:
 
-```text
-https://document-intelligence-538o.onrender.com/docs
-```
+\`\`\`text
 
-## Health
+https\://document-intelligence-538o.onrender.com/docs
 
-```http
+\`\`\`
+
+\## Health
+
+\`\`\`http
+
 GET /api/v1/health
-```
+
+\`\`\`
 
 Example:
 
-```json
+\`\`\`json
+
 {
-  "status": "ok",
-  "service": "document-intelligence"
+
+  "status": "ok",
+
+  "service": "document-intelligence"
+
 }
-```
 
-## Process document
+\`\`\`
 
-```http
+\## Process document
+
+\`\`\`http
+
 POST /api/v1/documents/process
-```
+
+\`\`\`
 
 Form fields:
 
-```text
-file            multipart file
-document_type   invoice | balance_sheet | profit_and_loss | cash_flow_statement
-```
+\`\`\`text
+
+file            multipart file
+
+document\_type   invoice | balance\_sheet | profit\_and\_loss | cash\_flow\_statement
+
+\`\`\`
 
 High-level response structure:
 
-```json
+\`\`\`json
+
 {
-  "document_name": "example.pdf",
-  "document_type": "balance_sheet",
-  "processing_status": "PASS",
-  "file_validation": {},
-  "extracted_text": "...",
-  "extracted_data": {
-    "ai_document_type": "balance_sheet",
-    "fields": [],
-    "tables": []
-  },
-  "confidence": 0.91,
-  "validation": {
-    "overall_status": "PASS",
-    "checks": [],
-    "errors": [],
-    "warnings": [],
-    "summary": {
-      "periods_checked": 2,
-      "passed_checks": 4,
-      "failed_checks": 0,
-      "not_applicable_checks": 2
-    }
-  }
+
+  "document\_name": "example.pdf",
+
+  "document\_type": "balance\_sheet",
+
+  "processing\_status": "PASS",
+
+  "file\_validation": {},
+
+  "extracted\_text": "...",
+
+  "extracted\_data": {
+
+    "ai\_document\_type": "balance\_sheet",
+
+    "fields": [],
+
+    "tables": []
+
+  },
+
+  "confidence": 0.91,
+
+  "validation": {
+
+    "overall\_status": "PASS",
+
+    "checks": [],
+
+    "errors": [],
+
+    "warnings": [],
+
+    "summary": {
+
+      "periods\_checked": 2,
+
+      "passed\_checks": 4,
+
+      "failed\_checks": 0,
+
+      "not\_applicable\_checks": 2
+
+    }
+
+  }
+
 }
-```
 
-## Get one document
+\`\`\`
 
-```http
-GET /api/v1/documents/{document_name}
-```
+\## Get one document
+
+\`\`\`http
+
+GET /api/v1/documents/{document\_name}
+
+\`\`\`
 
 Example:
 
-```text
+\`\`\`text
+
 GET /api/v1/documents/Balance%20Sheet%202019.pdf
-```
+
+\`\`\`
 
 The endpoint returns the stored processing result.
 
-## List documents
+\## List documents
 
-```http
+\`\`\`http
+
 GET /api/v1/documents
-```
+
+\`\`\`
 
 Example:
 
-```json
+\`\`\`json
+
 {
-  "count": 2,
-  "documents": [
-    {
-      "id": 1,
-      "document_name": "Balance Sheet 2019.pdf",
-      "document_type": "balance_sheet",
-      "processing_status": "PASS"
-    }
-  ]
+
+  "count": 2,
+
+  "documents": [
+
+    {
+
+      "id": 1,
+
+      "document\_name": "Balance Sheet 2019.pdf",
+
+      "document\_type": "balance\_sheet",
+
+      "processing\_status": "PASS"
+
+    }
+
+  ]
+
 }
-```
 
----
+\`\`\`
 
-# 7. Web Dashboard
+\---
+
+\# 7. Web Dashboard
 
 The frontend is intentionally implemented as a lightweight static application:
 
-```text
+\`\`\`text
+
 frontend/
+
 ├── index.html
+
 ├── style.css
+
 └── app.js
-```
+
+\`\`\`
 
 The current frontend includes:
 
-### Dashboard
+\### Dashboard
 
-- processed-document history
-- total document count
-- passed/failed counts
-- average confidence
-- document type
-- processing status
-- last updated timestamp
-- quick access to stored results
+\- processed-document history
 
-### Document processing
+\- total document count
 
-- document-type selector
-- file upload
-- processing status
-- deployed API health indicator
-- success/error messaging
+\- passed/failed counts
 
-### Result view
+\- average confidence
 
-- document summary
-- processing status
-- confidence
-- financial validation summary
-- detailed validation checks
-- calculated vs reported values
-- variance
-- extracted fields
-- field confidence
-- source evidence
-- missing-field highlighting
-- low-confidence highlighting
-- structured extracted tables
-- raw JSON viewer
-- copy-JSON action
+\- document type
 
-### UI / UX
+\- processing status
+
+\- last updated timestamp
+
+\- quick access to stored results
+
+\### Document processing
+
+\- document-type selector
+
+\- file upload
+
+\- processing status
+
+\- deployed API health indicator
+
+\- success/error messaging
+
+\### Result view
+
+\- document summary
+
+\- processing status
+
+\- confidence
+
+\- financial validation summary
+
+\- detailed validation checks
+
+\- calculated vs reported values
+
+\- variance
+
+\- extracted fields
+
+\- field confidence
+
+\- source evidence
+
+\- missing-field highlighting
+
+\- low-confidence highlighting
+
+\- structured extracted tables
+
+\- raw JSON viewer
+
+\- copy-JSON action
+
+\### UI / UX
 
 The frontend includes:
 
-- responsive desktop/mobile layout
-- light/dark theme
-- persisted theme preference
-- accessible focus states
-- responsive financial tables
-- visual PASS / FAIL / WARNING / NOT_APPLICABLE states
-- an editorial visual style built around a high-contrast signal color and structured information panels
+\- responsive desktop/mobile layout
 
----
+\- light/dark theme
 
-# 8. Data Persistence
+\- persisted theme preference
 
-FinSight AI uses **Supabase PostgreSQL** as the hosted database.
+\- accessible focus states
+
+\- responsive financial tables
+
+\- visual PASS / FAIL / WARNING / NOT\_APPLICABLE states
+
+\- an editorial visual style built around a high-contrast signal color and structured information panels
+
+\---
+
+\# 8. Data Persistence
+
+FinSight AI uses **\*\*Supabase PostgreSQL\*\*** as the hosted database.
 
 The backend uses:
 
-```text
+\`\`\`text
+
 SQLAlchemy
+
 psycopg2-binary
+
 PostgreSQL
+
 Supabase
-```
+
+\`\`\`
 
 The document result is persisted after processing.
 
 The logical record contains:
 
-| Column | Purpose |
-|---|---|
-| `id` | Database primary key |
-| `document_name` | Original uploaded filename |
-| `document_type` | Requested document type |
-| `processing_status` | PASS / FAILED |
-| `file_validation_json` | File validation result |
-| `extracted_text` | OCR/native text |
-| `extracted_data_json` | Structured AI extraction |
-| `confidence` | Overall extraction confidence |
-| `validation_json` | Financial validation result |
-| `created_at` | Creation timestamp |
-| `updated_at` | Last update timestamp |
+\| Column | Purpose |
+
+\|---|---|
+
+\| \`id\` | Database primary key |
+
+\| \`document\_name\` | Original uploaded filename |
+
+\| \`document\_type\` | Requested document type |
+
+\| \`processing\_status\` | PASS / FAILED |
+
+\| \`file\_validation\_json\` | File validation result |
+
+\| \`extracted\_text\` | OCR/native text |
+
+\| \`extracted\_data\_json\` | Structured AI extraction |
+
+\| \`confidence\` | Overall extraction confidence |
+
+\| \`validation\_json\` | Financial validation result |
+
+\| \`created\_at\` | Creation timestamp |
+
+\| \`updated\_at\` | Last update timestamp |
 
 The database layer updates an existing record for the same document name instead of creating unrestricted duplicates.
 
----
+\---
 
-# 9. End-to-End Architecture
+\# 9. End-to-End Architecture
 
-![FinSight AI System Architecture](docs/architecture.png)
+![FinSight AI System Architecture]\(docs/architecture.png)
 
 The architecture separates document intake, extraction, deterministic financial validation, persistence, and presentation into clear layers.
 
-```text
+\`\`\`text
+
 User
-  │
-  ▼
+
+  │
+
+  ▼
+
 Render Static Frontend
-  │
-  │ HTTPS / multipart / JSON
-  ▼
+
+  │
+
+  │ HTTPS / multipart / JSON
+
+  ▼
+
 Render FastAPI Backend
-  │
-  ├── File Validation
-  │
-  ├── Native PDF Text Extraction
-  │       └── pypdf
-  │
-  ├── OCR
-  │       ├── Tesseract
-  │       └── Poppler / pdf2image
-  │
-  ├── Groq AI Extraction
-  │       └── openai/gpt-oss-20b
-  │
-  ├── Confidence + Evidence
-  │
-  └── Financial Validation Router
-          ├── Invoice Validator
-          ├── Balance Sheet Validator
-          ├── Profit & Loss Validator
-          └── Cash Flow Validator
-                    │
-                    ▼
-             Supabase PostgreSQL
-                    │
-                    ▼
-          Stored Results / History
-                    │
-                    ▼
-              Frontend Dashboard
-```
+
+  │
+
+  ├── File Validation
+
+  │
+
+  ├── Native PDF Text Extraction
+
+  │       └── pypdf
+
+  │
+
+  ├── OCR
+
+  │       ├── Tesseract
+
+  │       └── Poppler / pdf2image
+
+  │
+
+  ├── Groq AI Extraction
+
+  │       └── openai/gpt-oss-20b
+
+  │
+
+  ├── Confidence + Evidence
+
+  │
+
+  └── Financial Validation Router
+
+          ├── Invoice Validator
+
+          ├── Balance Sheet Validator
+
+          ├── Profit & Loss Validator
+
+          └── Cash Flow Validator
+
+                    │
+
+                    ▼
+
+             Supabase PostgreSQL
+
+                    │
+
+                    ▼
+
+          Stored Results / History
+
+                    │
+
+                    ▼
+
+              Frontend Dashboard
+
+\`\`\`
 
 The key trust boundary is deliberate:
 
-```text
+\`\`\`text
+
 AI
+
 └── extracts and structures financial information
 
 Deterministic Python
+
 └── performs arithmetic reconciliation and validation
 
 PostgreSQL
+
 └── persists the processing result
 
 Frontend
+
 └── presents extraction, confidence, evidence, and validation
-```
 
-# 10. Repository Structure
+\`\`\`
 
-```text
+\# 10. Repository Structure
+
+\`\`\`text
+
 document-intelligence/
+
 │
+
 ├── backend/
-│   ├── __init__.py
-│   │
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py
-│   │   │
-│   │   ├── db/
-│   │   │   ├── __init__.py
-│   │   │   ├── database.py
-│   │   │   └── models.py
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── balance_sheet.py
-│   │   │   ├── cash_flow.py
-│   │   │   ├── extraction.py
-│   │   │   ├── invoice.py
-│   │   │   └── profit_loss.py
-│   │   │
-│   │   └── services/
-│   │       ├── balance_sheet_validation_service.py
-│   │       ├── cash_flow_validation_service.py
-│   │       ├── document_storage_service.py
-│   │       ├── document_validation_service.py
-│   │       ├── extraction_service.py
-│   │       ├── financial_validation_service.py
-│   │       ├── ocr_service.py
-│   │       ├── profit_loss_validation_service.py
-│   │       └── validation_router.py
-│   │
-│   ├── tests/
-│   │   ├── __init__.py
-│   │   ├── test_api.py
-│   │   ├── test_document_validation.py
-│   │   └── test_financial_validators.py
-│   │
-│   ├── test_balance_sheet_validation.py
-│   ├── test_cash_flow_validation.py
-│   ├── test_extraction.py
-│   └── test_validation.py
+
+│   ├── \_\_init\_\_.py
+
+│   │
+
+│   ├── app/
+
+│   │   ├── \_\_init\_\_.py
+
+│   │   ├── main.py
+
+│   │   │
+
+│   │   ├── db/
+
+│   │   │   ├── \_\_init\_\_.py
+
+│   │   │   ├── database.py
+
+│   │   │   └── models.py
+
+│   │   │
+
+│   │   ├── schemas/
+
+│   │   │   ├── balance\_sheet.py
+
+│   │   │   ├── cash\_flow\.py
+
+│   │   │   ├── extraction.py
+
+│   │   │   ├── invoice.py
+
+│   │   │   └── profit\_loss.py
+
+│   │   │
+
+│   │   └── services/
+
+│   │       ├── balance\_sheet\_validation\_service.py
+
+│   │       ├── cash\_flow\_validation\_service.py
+
+│   │       ├── document\_storage\_service.py
+
+│   │       ├── document\_validation\_service.py
+
+│   │       ├── extraction\_service.py
+
+│   │       ├── financial\_validation\_service.py
+
+│   │       ├── ocr\_service.py
+
+│   │       ├── profit\_loss\_validation\_service.py
+
+│   │       └── validation\_router.py
+
+│   │
+
+│   ├── tests/
+
+│   │   ├── \_\_init\_\_.py
+
+│   │   ├── test\_api.py
+
+│   │   ├── test\_document\_validation.py
+
+│   │   └── test\_financial\_validators.py
+
+│   │
+
+│   ├── test\_balance\_sheet\_validation.py
+
+│   ├── test\_cash\_flow\_validation.py
+
+│   ├── test\_extraction.py
+
+│   └── test\_validation.py
+
 │
+
 ├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
+
+│   ├── index.html
+
+│   ├── style.css
+
+│   └── app.js
+
 │
+
 ├── Dockerfile
+
 ├── requirements.txt
+
 ├── .gitignore
+
 ├── .env
+
 └── README.md
-```
 
-> `.env` is local configuration and must not be committed to source control.
+\`\`\`
 
----
+*> \`.env\` is local configuration and must not be committed to source control.*
 
-# 11. Technology Stack
+\---
 
-| Layer | Technology |
-|---|---|
-| Frontend | HTML5, CSS3, Vanilla JavaScript |
-| Backend | FastAPI |
-| API server | Uvicorn |
-| AI extraction | Groq API |
-| AI model | `openai/gpt-oss-20b` |
-| OCR | Tesseract |
-| PDF rendering for OCR | Poppler + `pdf2image` |
-| Native PDF text | `pypdf` |
-| Image handling | Pillow |
-| Validation | Python deterministic arithmetic |
-| Data validation | Pydantic |
-| ORM / DB access | SQLAlchemy |
-| Database | PostgreSQL |
-| Hosted database | Supabase |
-| Backend deployment | Render |
-| Containerization | Docker |
-| API documentation | OpenAPI / Swagger UI |
-| Testing | pytest |
+\# 11. Technology Stack
 
----
+\| Layer | Technology |
 
-# 12. Python Dependencies
+\|---|---|
+
+\| Frontend | HTML5, CSS3, Vanilla JavaScript |
+
+\| Backend | FastAPI |
+
+\| API server | Uvicorn |
+
+\| AI extraction | Groq API |
+
+\| AI model | \`openai/gpt-oss-20b\` |
+
+\| OCR | Tesseract |
+
+\| PDF rendering for OCR | Poppler + \`pdf2image\` |
+
+\| Native PDF text | \`pypdf\` |
+
+\| Image handling | Pillow |
+
+\| Validation | Python deterministic arithmetic |
+
+\| Data validation | Pydantic |
+
+\| ORM / DB access | SQLAlchemy |
+
+\| Database | PostgreSQL |
+
+\| Hosted database | Supabase |
+
+\| Backend deployment | Render |
+
+\| Containerization | Docker |
+
+\| API documentation | OpenAPI / Swagger UI |
+
+\| Testing | pytest |
+
+\---
+
+\# 12. Python Dependencies
 
 The current environment includes the main packages required by the application:
 
-```text
+\`\`\`text
+
 fastapi
+
 uvicorn
+
 python-multipart
+
 pypdf
+
 pdf2image
+
 pytesseract
+
 pillow
+
 groq
+
 python-dotenv
+
 SQLAlchemy
+
 psycopg2-binary
+
 pytest
-```
 
-The project also retains pinned transitive dependencies in `requirements.txt`.
+\`\`\`
 
----
+The project also retains pinned transitive dependencies in \`requirements.txt\`.
 
-# 13. Local Development
+\---
 
-## Prerequisites
+\# 13. Local Development
+
+\## Prerequisites
 
 Install:
 
-- Python 3.12+ recommended for deployment
-- Tesseract OCR
-- Poppler
-- Docker Desktop (for container testing)
+\- Python 3.12+ recommended for deployment
 
-A local Windows development environment can use local Tesseract/Poppler installations. The OCR service also supports hosted Linux environments where these tools are available on the system `PATH`.
+\- Tesseract OCR
 
-## Create virtual environment
+\- Poppler
 
-```powershell
+\- Docker Desktop (for container testing)
+
+A local Windows development environment can use local Tesseract/Poppler installations. The OCR service also supports hosted Linux environments where these tools are available on the system \`PATH\`.
+
+\## Create virtual environment
+
+\`\`\`powershell
+
 python -m venv .venv
-```
+
+\`\`\`
 
 Activate:
 
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
+\`\`\`powershell
 
-## Install dependencies
+.\\.venv\Scripts\Activate.ps1
 
-```powershell
+\`\`\`
+
+\## Install dependencies
+
+\`\`\`powershell
+
 pip install -r requirements.txt
-```
 
-## Environment variables
+\`\`\`
 
-Create `.env` in the project root:
+\## Environment variables
 
-```env
-GROQ_API_KEY=your_groq_key
-DATABASE_URL=postgresql://...
-```
+Create \`.env\` in the project root:
+
+\`\`\`env
+
+GROQ\_API\_KEY=your\_groq\_key
+
+DATABASE\_URL=postgresql://...
+
+\`\`\`
 
 For hosted deployment, these values should be configured through the hosting provider's secret/environment-variable settings.
 
-## Run backend locally
+\## Run backend locally
 
-```powershell
-uvicorn backend.app.main:app --reload
-```
+\`\`\`powershell
+
+uvicorn backend.app.main\:app --reload
+
+\`\`\`
 
 Open:
 
-```text
-http://127.0.0.1:8000/docs
-```
+\`\`\`text
 
-## Run frontend locally
+http\://127.0.0.1:8000/docs
+
+\`\`\`
+
+\## Run frontend locally
 
 From the project root:
 
-```powershell
+\`\`\`powershell
+
 python -m http.server 5500 --directory frontend
-```
+
+\`\`\`
 
 Open:
 
-```text
-http://127.0.0.1:5500
-```
+\`\`\`text
 
----
+http\://127.0.0.1:5500
 
-# 14. Docker
+\`\`\`
+
+\---
+
+\# 14. Docker
 
 The backend is containerized so the deployment environment can install system OCR dependencies consistently.
 
 The Docker image installs:
 
-```text
+\`\`\`text
+
 Tesseract OCR
+
 Poppler
+
 Python dependencies
-```
+
+\`\`\`
 
 and starts FastAPI with:
 
-```bash
-uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
-```
+\`\`\`bash
 
-## Build image
+uvicorn backend.app.main\:app --host 0.0.0.0 --port $PORT
 
-```powershell
+\`\`\`
+
+\## Build image
+
+\`\`\`powershell
+
 docker build -t document-intelligence .
-```
 
-## Run image with local secrets
+\`\`\`
 
-```powershell
+\## Run image with local secrets
+
+\`\`\`powershell
+
 docker run --rm -p 8000:8000 --env-file .env document-intelligence
-```
+
+\`\`\`
 
 Then:
 
-```text
-http://127.0.0.1:8000/docs
-```
+\`\`\`text
 
----
+http\://127.0.0.1:8000/docs
 
-# 15. Deployment
+\`\`\`
 
-## Backend
+\---
 
-The backend is deployed on **Render** as a Docker-based web service.
+\# 15. Deployment
+
+\## Backend
+
+The backend is deployed on **\*\*Render\*\*** as a Docker-based web service.
 
 Live backend:
 
-```text
-https://document-intelligence-538o.onrender.com
-```
+\`\`\`text
+
+https\://document-intelligence-538o.onrender.com
+
+\`\`\`
 
 Swagger:
 
-```text
-https://document-intelligence-538o.onrender.com/docs
-```
+\`\`\`text
+
+https\://document-intelligence-538o.onrender.com/docs
+
+\`\`\`
 
 Health check:
 
-```text
-https://document-intelligence-538o.onrender.com/api/v1/health
-```
+\`\`\`text
+
+https\://document-intelligence-538o.onrender.com/api/v1/health
+
+\`\`\`
 
 Render environment variables:
 
-```text
-GROQ_API_KEY
-DATABASE_URL
-```
+\`\`\`text
 
-## Database
+GROQ\_API\_KEY
 
-The application uses hosted PostgreSQL through **Supabase**.
+DATABASE\_URL
+
+\`\`\`
+
+\## Database
+
+The application uses hosted PostgreSQL through **\*\*Supabase\*\***.
 
 The deployed backend connects to the database through the PostgreSQL connection string configured as:
 
-```env
-DATABASE_URL=...
-```
+\`\`\`env
+
+DATABASE\_URL=...
+
+\`\`\`
 
 For hosted IPv4 environments, use the appropriate Supabase pooler connection configuration supplied by the project.
 
-## Frontend
+\## Frontend
 
 The frontend is a static HTML/CSS/JavaScript application and can be deployed as a Render Static Site.
 
 The frontend API target is configured in:
 
-```text
+\`\`\`text
+
 frontend/app.js
-```
+
+\`\`\`
 
 Example:
 
-```javascript
-const API_BASE_URL =
-    "https://document-intelligence-538o.onrender.com";
-```
+\`\`\`javascript
 
----
+const API\_BASE\_URL =
 
-# 16. Security Practices
+    "https\://document-intelligence-538o.onrender.com";
+
+\`\`\`
+
+\---
+
+\# 16. Security Practices
 
 Secrets are externalized from application code.
 
 Do not commit:
 
-```text
-.env
-.venv/
-*.db
-__pycache__/
-*.pyc
-```
+\`\`\`text
 
-The `.gitignore` should contain:
-
-```text
 .env
+
 .venv/
-__pycache__/
-*.pyc
-*.db
-```
+
+\*.db
+
+\_\_pycache\_\_/
+
+\*.pyc
+
+\`\`\`
+
+The \`.gitignore\` should contain:
+
+\`\`\`text
+
+.env
+
+.venv/
+
+\_\_pycache\_\_/
+
+\*.pyc
+
+\*.db
+
+\`\`\`
 
 Recommended production improvements include:
 
-- authentication and authorization
-- upload rate limiting
-- file-content scanning
-- stricter CORS configuration
-- structured application logging
-- audit trails
-- encrypted object storage for original files
-- retention/deletion policies
-- monitoring and alerting
-- background job processing for long-running OCR/AI workloads
+\- authentication and authorization
 
----
+\- upload rate limiting
 
-# 17. Error Handling
+\- file-content scanning
+
+\- stricter CORS configuration
+
+\- structured application logging
+
+\- audit trails
+
+\- encrypted object storage for original files
+
+\- retention/deletion policies
+
+\- monitoring and alerting
+
+\- background job processing for long-running OCR/AI workloads
+
+\---
+
+\# 17. Error Handling
 
 The API uses structured HTTP errors for important pipeline failures.
 
 Representative codes include:
 
-```text
-MISSING_FILENAME
-UNSUPPORTED_DOCUMENT_TYPE
-FILE_READ_ERROR
-FILE_VALIDATION_ERROR
-UNSUPPORTED_FILE_TYPE
-OCR_ERROR
-AI_EXTRACTION_ERROR
-CONFIDENCE_CALCULATION_ERROR
-FINANCIAL_VALIDATION_ERROR
-DATABASE_STORAGE_ERROR
-DATABASE_READ_ERROR
-DOCUMENT_NOT_FOUND
-```
+\`\`\`text
+
+MISSING\_FILENAME
+
+UNSUPPORTED\_DOCUMENT\_TYPE
+
+FILE\_READ\_ERROR
+
+FILE\_VALIDATION\_ERROR
+
+UNSUPPORTED\_FILE\_TYPE
+
+OCR\_ERROR
+
+AI\_EXTRACTION\_ERROR
+
+CONFIDENCE\_CALCULATION\_ERROR
+
+FINANCIAL\_VALIDATION\_ERROR
+
+DATABASE\_STORAGE\_ERROR
+
+DATABASE\_READ\_ERROR
+
+DOCUMENT\_NOT\_FOUND
+
+\`\`\`
 
 The processing pipeline stops early when a document is invalid or no readable text can be extracted.
 
----
+\---
 
-# 18. Processing Status Rules
+\# 18. Processing Status Rules
 
 The API separates:
 
-```text
-processing_status
-```
+\`\`\`text
+
+processing\_status
+
+\`\`\`
 
 from:
 
-```text
-validation.overall_status
-```
+\`\`\`text
+
+validation.overall\_status
+
+\`\`\`
 
 Financial validation can produce:
 
-```text
+\`\`\`text
+
 PASS
+
 FAIL
+
 WARNING
-NOT_APPLICABLE
-```
+
+NOT\_APPLICABLE
+
+\`\`\`
 
 The high-level document processing result uses:
 
-```text
+\`\`\`text
+
 PASS
+
 FAILED
-```
+
+\`\`\`
 
 For example:
 
-```text
+\`\`\`text
+
 Validation:
+
 FAIL
 
 Processing:
+
 FAILED
-```
+
+\`\`\`
 
 or:
 
-```text
+\`\`\`text
+
 Validation:
+
 WARNING
 
 Processing:
+
 PASS
-```
+
+\`\`\`
 
 The intention is to expose validation information while maintaining a simple top-level processing state for dashboard/API consumers.
 
----
+\---
 
-# 19. Failure Behavior
+\# 19. Failure Behavior
 
 The system is designed not to invent missing financial values.
 
 Examples:
 
-### Missing value
+\### Missing value
 
-```text
+\`\`\`text
+
 value = null
-```
+
+\`\`\`
 
 and the UI highlights it as unavailable.
 
-### Insufficient validation data
+\### Insufficient validation data
 
-```text
-status = NOT_APPLICABLE
-```
+\`\`\`text
+
+status = NOT\_APPLICABLE
+
+\`\`\`
 
 rather than manufacturing an operand.
 
-### Source arithmetic discrepancy
+\### Source arithmetic discrepancy
 
-```text
+\`\`\`text
+
 status = FAIL
-```
+
+\`\`\`
 
 with:
 
-```text
+\`\`\`text
+
 calculated
+
 reported
+
 variance
+
 formula
-```
+
+\`\`\`
 
 when available.
 
 This makes discrepancies visible to the user rather than hiding them.
 
----
+\---
 
 
-# 21. Sample Dataset
+
+\# 21. Sample Dataset
 
 The supplied development dataset contains:
 
-```text
+\`\`\`text
+
 10 Balance Sheet PDFs
+
 10 Cash Flow Statement PDFs
+
 10 Profit & Loss PDFs
+
 20 Invoice JPGs
-```
+
+\`\`\`
 
 The application was developed around the variety in these financial samples, including scanned documents and comparative financial periods.
 
 Representative financial validation scenarios include multi-period statements and invoice line-item arithmetic.
 
----
+\---
 
-# 22. AI / Tool Usage Declaration
+\# 22. AI / Tool Usage Declaration
 
 AI assistance is used primarily for:
 
-```text
+\`\`\`text
+
 Document field extraction
+
 Table extraction
+
 OCR-to-structured-data interpretation
+
 Evidence association
+
 Confidence estimation
-```
+
+\`\`\`
 
 Deterministic Python logic is used for:
 
-```text
+\`\`\`text
+
 File validation
+
 Document-type checks
+
 Financial arithmetic
+
 Reconciliation formulas
+
 Tolerance evaluation
+
 Processing status
+
 Persistence
+
 API behavior
-```
+
+\`\`\`
 
 The architecture deliberately avoids treating AI output as the final financial authority.
 
 The financial validation layer is deterministic and auditable.
 
----
+\---
 
-# 23. Known Limitations
+\# 23. Known Limitations
 
-### OCR quality
+\### OCR quality
 
 OCR accuracy depends on image quality, scan resolution, skew, handwriting, compression, and document layout.
 
-### Complex tables
+\### Complex tables
 
 Highly irregular, merged-cell, or visually complex tables can reduce extraction quality.
 
-### AI extraction variability
+\### AI extraction variability
 
 AI extraction can still produce malformed, incomplete, or ambiguous values. This is why evidence, confidence, and deterministic validation are exposed separately.
 
-### Comparative statements
+\### Comparative statements
 
 Financial reports with multiple periods can contain inconsistent or ambiguous extraction patterns. Validators therefore use period-aware logic and avoid forcing checks when the extracted structure is not reliable enough.
 
-### Free-tier hosting
+\### Free-tier hosting
 
 The deployed demo depends on free-tier hosting characteristics such as cold starts, inactivity pauses, quota limits, and shared infrastructure.
 
-### Original file storage
+\### Original file storage
 
-The current database stores the **processed result and extracted content**, not a durable copy of the uploaded original binary file.
+The current database stores the **\*\*processed result and extracted content\*\***, not a durable copy of the uploaded original binary file.
 
-### Authentication
+\### Authentication
 
 The current demo API does not implement a full authentication/authorization system.
 
----
+\---
 
-# 24. Production Recommendations
+\# 24. Production Recommendations
 
 For a production financial-document platform, the next architectural upgrades would be:
 
-1. **Object storage**
-   - Store original documents in S3-compatible or cloud object storage.
-   - Keep database records as metadata/results.
+1\. **\*\*Object storage\*\***
 
-2. **Background processing**
-   - Move OCR and AI extraction into asynchronous workers.
-   - Return a job ID immediately for long-running documents.
+   - Store original documents in S3-compatible or cloud object storage.
 
-3. **Queue**
-   - Add Redis/Celery/RQ or a managed queue for reliable job execution.
+   - Keep database records as metadata/results.
 
-4. **Authentication**
-   - Add users, roles, API keys, or OAuth.
+2\. **\*\*Background processing\*\***
 
-5. **Auditing**
-   - Store validation versions, model versions, prompts, timestamps, and reviewer actions.
+   - Move OCR and AI extraction into asynchronous workers.
 
-6. **Observability**
-   - Structured logging
-   - Metrics
-   - Error tracking
-   - Request IDs
-   - Latency monitoring
+   - Return a job ID immediately for long-running documents.
 
-7. **Data governance**
-   - Retention policy
-   - Encryption
-   - Data deletion workflow
-   - Access controls
-   - PII/sensitive-data handling
+3\. **\*\*Queue\*\***
 
-8. **Database migrations**
-   - Use Alembic rather than relying on `create_all()` for long-lived production schemas.
+   - Add Redis/Celery/RQ or a managed queue for reliable job execution.
 
-9. **Security hardening**
-   - Restrict CORS
-   - Upload scanning
-   - Request limits
-   - Authentication
-   - Dependency scanning
-   - Secret rotation
+4\. **\*\*Authentication\*\***
 
-10. **Validator versioning**
-    - Version reconciliation formulas and tolerance rules so historical results remain reproducible.
+   - Add users, roles, API keys, or OAuth.
 
----
+5\. **\*\*Auditing\*\***
 
-# 25. Architecture Decision Notes
+   - Store validation versions, model versions, prompts, timestamps, and reviewer actions.
 
-## Why flexible extraction instead of rigid document schemas?
+6\. **\*\*Observability\*\***
+
+   - Structured logging
+
+   - Metrics
+
+   - Error tracking
+
+   - Request IDs
+
+   - Latency monitoring
+
+7\. **\*\*Data governance\*\***
+
+   - Retention policy
+
+   - Encryption
+
+   - Data deletion workflow
+
+   - Access controls
+
+   - PII/sensitive-data handling
+
+8\. **\*\*Database migrations\*\***
+
+   - Use Alembic rather than relying on \`create\_all()\` for long-lived production schemas.
+
+9\. **\*\*Security hardening\*\***
+
+   - Restrict CORS
+
+   - Upload scanning
+
+   - Request limits
+
+   - Authentication
+
+   - Dependency scanning
+
+   - Secret rotation
+
+10\. **\*\*Validator versioning\*\***
+
+    - Version reconciliation formulas and tolerance rules so historical results remain reproducible.
+
+\---
+
+\# 25. Architecture Decision Notes
+
+\## Why flexible extraction instead of rigid document schemas?
 
 The system supports multiple document layouts and variable financial statement structures.
 
-A flexible `fields + tables` representation allows the AI extraction layer to adapt to document-specific rows while the validator layer searches for known financial concepts using aliases.
+A flexible \`fields + tables\` representation allows the AI extraction layer to adapt to document-specific rows while the validator layer searches for known financial concepts using aliases.
 
 This reduces coupling between:
 
-```text
-OCR
-AI extraction
-Financial validation
-Frontend
-```
+\`\`\`text
 
-## Why deterministic validation after AI?
+OCR
+
+AI extraction
+
+Financial validation
+
+Frontend
+
+\`\`\`
+
+\## Why deterministic validation after AI?
 
 LLMs are useful for reading and structuring documents, but arithmetic reconciliation should remain deterministic.
 
 Therefore:
 
-```text
-AI = interpret document
-Python = verify financial logic
-```
+\`\`\`text
 
-## Why `NOT_APPLICABLE`?
+AI = interpret document
+
+Python = verify financial logic
+
+\`\`\`
+
+\## Why \`NOT\_APPLICABLE\`?
 
 A missing or unreliable operand should not be silently replaced with an invented value.
 
-`NOT_APPLICABLE` makes the limitation explicit.
+\`NOT\_APPLICABLE\` makes the limitation explicit.
 
----
+\---
 
-# 26. Demo Flow
+\# 26. Demo Flow
 
 A recommended demonstration sequence is:
 
-```text
-1. Open FinSight AI
-2. Show API status
-3. Open Process Document
-4. Select document type
-5. Upload a financial document
-6. Process
-7. Show extracted fields
-8. Show confidence/evidence
-9. Show validation checks
-10. Show PASS / FAILED result
-11. Return to Dashboard
-12. Show stored document
-13. Open the stored document
-14. Open Swagger
-15. Show Supabase persistence
-```
+\`\`\`text
+
+1\. Open FinSight AI
+
+2\. Show API status
+
+3\. Open Process Document
+
+4\. Select document type
+
+5\. Upload a financial document
+
+6\. Process
+
+7\. Show extracted fields
+
+8\. Show confidence/evidence
+
+9\. Show validation checks
+
+10\. Show PASS / FAILED result
+
+11\. Return to Dashboard
+
+12\. Show stored document
+
+13\. Open the stored document
+
+14\. Open Swagger
+
+15\. Show Supabase persistence
+
+\`\`\`
 
 For a strong demo, use examples covering:
 
-```text
+\`\`\`text
+
 Invoice
+
 Balance Sheet
+
 Profit & Loss
+
 Cash Flow Statement
-```
+
+\`\`\`
 
 and include at least one validation failure so the audience can see that the system reports discrepancies instead of hiding them.
 
----
+\---
 
 
-# 28. Useful URLs
 
-### Backend
+\# 28. Useful URLs
 
-```text
-https://document-intelligence-538o.onrender.com
-```
+\### Backend
 
-### Swagger
+\`\`\`text
 
-```text
-https://document-intelligence-538o.onrender.com/docs
-```
+https\://document-intelligence-538o.onrender.com
 
-### Health
+\`\`\`
 
-```text
-https://document-intelligence-538o.onrender.com/api/v1/health
-```
+\### Swagger
 
-### Frontend
+\`\`\`text
 
-```text
-https://finsight-ai-povk.onrender.com
-```
+https\://document-intelligence-538o.onrender.com/docs
 
-### GitHub
+\`\`\`
 
-```text
-https://github.com/san-jay19/document-intelligence
-```
+\### Health
 
----
+\`\`\`text
 
+https\://document-intelligence-538o.onrender.com/api/v1/health
+
+\`\`\`
+
+\### Frontend
+
+\`\`\`text
+
+https\://finsight-ai-povk.onrender.com
+
+\`\`\`
+
+\### GitHub
+
+\`\`\`text
+
+https\://github.com/san-jay19/document-intelligence
+
+\`\`\`
+
+\---
