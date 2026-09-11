@@ -460,7 +460,6 @@ async function processDocument(event) {
         return;
     }
 
-
     const formData =
         new FormData();
 
@@ -473,7 +472,6 @@ async function processDocument(event) {
         "document_type",
         documentType
     );
-
 
     const processButton =
         $("processButton");
@@ -488,36 +486,95 @@ async function processDocument(event) {
         "info"
     );
 
-
     try {
 
-        const response =
-            await fetch(
-                `${API_BASE_URL}/api/v1/documents/process`,
-                {
-                    method: "POST",
-                    body: formData,
-                    cache: "no-store",
-                }
-            );
+        const data = await new Promise(
+            (resolve, reject) => {
 
+                const xhr =
+                    new XMLHttpRequest();
 
-        const data =
-            await response.json();
+                xhr.open(
+                    "POST",
+                    `${API_BASE_URL}/api/v1/documents/process`,
+                    true
+                );
 
+                xhr.setRequestHeader(
+                    "Accept",
+                    "application/json"
+                );
 
-        if (!response.ok) {
+                xhr.timeout =
+                    180000;
 
-            const message =
-                data?.detail?.message
-                || data?.detail
-                || "Document processing failed.";
+                xhr.onload = () => {
 
-            throw new Error(
-                message
-            );
-        }
+                    let responseData = null;
 
+                    try {
+                        responseData =
+                            xhr.responseText
+                                ? JSON.parse(
+                                    xhr.responseText
+                                )
+                                : null;
+                    } catch (error) {
+                        responseData = null;
+                    }
+
+                    if (
+                        xhr.status >= 200
+                        && xhr.status < 300
+                    ) {
+                        resolve(
+                            responseData
+                        );
+                        return;
+                    }
+
+                    const message =
+                        responseData?.detail?.message
+                        || responseData?.detail
+                        || `Request failed with HTTP ${xhr.status}`;
+
+                    reject(
+                        new Error(message)
+                    );
+                };
+
+                xhr.onerror = () => {
+
+                    reject(
+                        new Error(
+                            "Network error while uploading the document. This may be caused by CORS or the mobile network."
+                        )
+                    );
+                };
+
+                xhr.ontimeout = () => {
+
+                    reject(
+                        new Error(
+                            "Document processing timed out. Please try a smaller document."
+                        )
+                    );
+                };
+
+                xhr.onabort = () => {
+
+                    reject(
+                        new Error(
+                            "Document upload was cancelled."
+                        )
+                    );
+                };
+
+                xhr.send(
+                    formData
+                );
+            }
+        );
 
         renderResult(data);
 
@@ -533,7 +590,10 @@ async function processDocument(event) {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Document processing error:",
+            error
+        );
 
         showMessage(
             error.message
