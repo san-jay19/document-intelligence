@@ -502,33 +502,65 @@ The database layer updates an existing record for the same document name instead
 
 # 9. End-to-End Architecture
 
-```mermaid
-flowchart LR
-    U[User] --> F[Render Static Frontend]
+![FinSight AI System Architecture](docs/architecture.png)
 
-    F -->|HTTPS / JSON / multipart| API[Render FastAPI Backend]
+The architecture separates document intake, extraction, deterministic financial validation, persistence, and presentation into clear layers.
 
-    API --> V[File Validation]
-    V --> O[Native PDF Text / OCR]
-    O --> AI[Groq AI Extraction]
-
-    AI --> C[Confidence + Evidence]
-    C --> R[Validation Router]
-
-    R --> INV[Invoice Validator]
-    R --> BS[Balance Sheet Validator]
-    R --> PL[Profit & Loss Validator]
-    R --> CF[Cash Flow Validator]
-
-    INV --> DB[Supabase PostgreSQL]
-    BS --> DB
-    PL --> DB
-    CF --> DB
-
-    DB --> F
+```text
+User
+  │
+  ▼
+Render Static Frontend
+  │
+  │ HTTPS / multipart / JSON
+  ▼
+Render FastAPI Backend
+  │
+  ├── File Validation
+  │
+  ├── Native PDF Text Extraction
+  │       └── pypdf
+  │
+  ├── OCR
+  │       ├── Tesseract
+  │       └── Poppler / pdf2image
+  │
+  ├── Groq AI Extraction
+  │       └── openai/gpt-oss-20b
+  │
+  ├── Confidence + Evidence
+  │
+  └── Financial Validation Router
+          ├── Invoice Validator
+          ├── Balance Sheet Validator
+          ├── Profit & Loss Validator
+          └── Cash Flow Validator
+                    │
+                    ▼
+             Supabase PostgreSQL
+                    │
+                    ▼
+          Stored Results / History
+                    │
+                    ▼
+              Frontend Dashboard
 ```
 
----
+The key trust boundary is deliberate:
+
+```text
+AI
+└── extracts and structures financial information
+
+Deterministic Python
+└── performs arithmetic reconciliation and validation
+
+PostgreSQL
+└── persists the processing result
+
+Frontend
+└── presents extraction, confidence, evidence, and validation
+```
 
 # 10. Repository Structure
 
