@@ -57,7 +57,7 @@ app = FastAPI(
 
 FRONTEND_URL = os.getenv(
     "FRONTEND_URL",
-    "https://finsight-ai-povk.onrender.com",
+    "https://document-intelligence-1-dkaj.onrender.com",
 )
 
 ALLOWED_ORIGINS = [
