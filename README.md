@@ -10,7 +10,7 @@
 
 <p align="center">
 
-  <a href="https://finsight-ai-povk.onrender.com">
+  <a href="https://document-intelligence-1-dkaj.onrender.com">
     <img src="https://img.shields.io/badge/Frontend-Live%20App-ff4d1c?style=for-the-badge&logo=render&logoColor=white" alt="Live Frontend">
   </a>
 
@@ -752,9 +752,9 @@ The database layer updates an existing record for the same document name instead
 
 # 7. End-to-End Architecture
 
-[![FinSight AI System Architecture](docs/architecture.png)](https://finsight-ai-povk.onrender.com)
+[![FinSight AI System Architecture](docs/architecture.png)](https://document-intelligence-1-dkaj.onrender.com)
 
-**Architecture — Live Frontend:** https://finsight-ai-povk.onrender.com  
+**Architecture — Live Frontend:** https://document-intelligence-1-dkaj.onrender.com  
 **Architecture — Live Backend:** https://document-intelligence-538o.onrender.com  
 **Architecture — Swagger:** https://document-intelligence-538o.onrender.com/docs
 
@@ -1810,7 +1810,7 @@ https://document-intelligence-538o.onrender.com/api/v1/health
 
 ```text
 
-https://finsight-ai-povk.onrender.com
+https://document-intelligence-1-dkaj.onrender.com
 
 ```
 
